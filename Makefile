@@ -1,7 +1,7 @@
 .PHONY: clean all
 
 all:
-	./BUILD-and-INSTALL.sh go
+	./BUILDME.sh buildinstall
 
 clean:
 	rm SOURCES/*.gz
