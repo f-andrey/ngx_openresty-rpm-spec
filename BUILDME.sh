@@ -4,19 +4,18 @@ HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 VERSION=1.9.7.2
 RELEASE=4
 USER=$(whoami)
-SUDO=""
 
 # Fix issue with Gitlab CI builds in docker containers
 # (`sudo` is not available)
-if [[ ! "$USER" == "root" ]]; then
-	SUDO="sudo"
-fi
+#if [[ ! "$USER" == "root" ]]; then
+#	SUDO="sudo"
+#fi
 
 install_required_packages()
 {
 	echo -e "\nInstalling packages required to build RPMs...."
-	${SUDO} yum -y install epel-release deltarpm
-	${SUDO} yum -y install git make gcc sed postgresql-devel readline-devel \
+	yum -y install epel-release deltarpm
+	yum -y install git make gcc sed postgresql-devel readline-devel \
 	pcre-devel openssl-devel gcc pcre-devel libxml2-devel libxslt-devel \
 	gd-devel geoip-devel gperftools-devel libatomic_ops-devel rpm-build \
 	gperftools-devel lua-devel
@@ -50,7 +49,7 @@ install_test_package()
 	
 	if [ -f ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm ]; then
 		echo -e "\nInstalling package and dependencies...."
-		${SUDO} yum -y install ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm
+		yum -y install ${HOME}/rpmbuild/RPMS/x86_64/ngx_openresty-${VERSION}-${RELEASE}.el7.centos.x86_64.rpm
 	else
 		echo -e "\nERROR: No RPM found..."
 	fi
